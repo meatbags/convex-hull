@@ -24,6 +24,10 @@ const CrossProduct = (a, b) => {
   return a.x*b.y - a.y*b.x;
 };
 
+const PointInsideTetrahedron = (point, A, B, C, D) => {
+  
+};
+
 const PointInsideTriangle = (p, a, b, c) => {
   // sides
   let AB = {x: b.x-a.x, y: b.y-a.y};
