@@ -1,9 +1,12 @@
 /** Convex Hull 2D */
 
 import GrahamScan from '../maths/graham_scan';
+import PointInsideTriangle from '../maths/point_inside_triangle';
 
 class ConvexHull2D {
-  constructor() {}
+  constructor() {
+    this.run();
+  }
 
   run() {
     // clear
@@ -21,7 +24,7 @@ class ConvexHull2D {
       let y = (Math.random() * 2 - 1) * 100 + 200;
       points.push({x, y});
     }
-    ctx.fillStyle = '#222';
+    ctx.fillStyle = '#eee';
     points.forEach(p => {
       ctx.fillRect(p.x-1, p.y-1, 2, 2);
     });
@@ -35,9 +38,9 @@ class ConvexHull2D {
     ctx.stroke();
 
     // create triangle
-    let a = {x: 200, y:  40};
-    let b = {x:  40, y: 360};
-    let c = {x: 380, y: 360};
+    let a = {x: Math.random() * 400, y: Math.random() * 400};
+    let b = {x: Math.random() * 400, y: Math.random() * 400};
+    let c = {x: Math.random() * 400, y: Math.random() * 400};
     let triangle = [a, b, c];
     ctx.strokeStyle = '#f00';
     ctx.beginPath();
@@ -53,7 +56,7 @@ class ConvexHull2D {
       } else {
         ctx.fillStyle = '#444';
       }
-      ctx.fillRect(x-1, y-1, 2, 2);
+      ctx.fillRect(x-2, y-2, 4, 4);
     }
   }
 }

@@ -58,3 +58,5 @@ const GrahamScan = points => {
 
   return stack;
 }
+
+export default GrahamScan;
