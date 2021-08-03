@@ -20,18 +20,6 @@ class ConvexHull3D {
         Math.random() * 100,
       ));
     }
-
-    // known hull
-    return;
-
-    this.points.push(new Vector(-220, -220, 101));
-    this.points.push(new Vector( 220, -220, 101));
-    this.points.push(new Vector(-220,  220, 101));
-    this.points.push(new Vector( 220,  220, 101));
-    this.points.push(new Vector(-220, -220, -1));
-    this.points.push(new Vector( 220, -220, -1));
-    this.points.push(new Vector(-220,  220, -1));
-    this.points.push(new Vector( 220,  220, -1));
   }
 
   createConvexHull() {
