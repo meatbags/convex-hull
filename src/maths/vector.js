@@ -16,7 +16,7 @@ class Vector {
 
   normalise() {
     let mag = Math.sqrt(this.x*this.x + this.y*this.y + this.z*this.z);
-    if (mag == 0) { return this; }
+    if (mag === 0) { return; }
     this.x /= mag;
     this.y /= mag;
     this.z /= mag;
