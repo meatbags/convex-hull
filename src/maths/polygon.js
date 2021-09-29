@@ -36,20 +36,20 @@ class Polygon {
     ctx.lineTo(cx+b.x, cy+b.y);
     ctx.lineTo(cx+c.x, cy+c.y);
     ctx.closePath();
-    // ctx.stroke();
+    ctx.stroke();
 
     // check backface
     if (DotProduct(this.normal, new Vector(0, 0, 1)) < 0) {
-      ctx.fill();
+      // ctx.fill();
     }
 
     // draw normal vector
     ctx.beginPath();
     let p = this.toScreen(this.centre);
     let pn = this.toScreen(new Vector(
-      this.centre.x + this.normal.x*10,
-      this.centre.y + this.normal.y*10,
-      this.centre.z + this.normal.z*10,
+      this.centre.x + this.normal.x*20,
+      this.centre.y + this.normal.y*20,
+      this.centre.z + this.normal.z*20,
     ));
     ctx.moveTo(cx+p.x, cy+p.y);
     ctx.lineTo(cx+pn.x, cy+pn.y);

@@ -9,15 +9,18 @@ const SURFACE_EPSILON = 0.01;
 const PI_TWO_THIRDS = Math.PI * 2 / 3;
 const PI_FOUR_THIRDS = Math.PI * 4 / 3;
 
-const FindHull = (polygon, points) => {
+const FindHull = (polygon, points, epsilon=null) => {
   const filtered = [];
+  if (epsilon === null) {
+    epsilon = SURFACE_EPSILON;
+  }
 
   // find points above plane, furthest point
   let peak = null;
   let dist = null;
   points.forEach(p => {
     let d = PointPlaneDistance(p, polygon.vertex.a, polygon.normal);
-    if (d > SURFACE_EPSILON) {
+    if (d > epsilon) {
       filtered.push(p);
       if (peak === null || d > dist) {
         peak = p;
@@ -50,7 +53,7 @@ const FindHull = (polygon, points) => {
   }
 };
 
-const ConvexHull = points => {
+const ConvexHull = (points, epsilon=null) => {
   // get centre of points
   const box = new Box();
   box.fromPoints(points);
@@ -69,6 +72,7 @@ const ConvexHull = points => {
   let dist2 = null;
   let dist3 = null;
   let dist4 = null;
+
   points.forEach(p => {
     let d1 = PointPlaneDistance(p, origin, n1);
     let d2 = PointPlaneDistance(p, origin, n2);
@@ -79,23 +83,19 @@ const ConvexHull = points => {
     if (p3 === null || d3 > dist3) { p3 = p; dist3 = d3; }
     if (p4 === null || d4 > dist4) { p4 = p; dist4 = d4; }
   });
+
   const f1 = new Polygon(p1, p2, p4);
   const f2 = new Polygon(p2, p3, p4);
   const f3 = new Polygon(p3, p1, p4);
   const f4 = new Polygon(p1, p3, p2);
 
-  let hull = [
-    ...FindHull(f1, points),
-    ...FindHull(f2, points),
-    ...FindHull(f3, points),
-    ...FindHull(f4, points),
+  const hull = [
+    ...FindHull(f1, points, epsilon),
+    ...FindHull(f2, points, epsilon),
+    ...FindHull(f3, points, epsilon),
+    ...FindHull(f4, points, epsilon),
   ];
 
-  // get hull recursively
-  //let hull = FindHull(polygon, points);
-  //polygon.normal.invert();
-  //hull = [ ...hull, ...FindHull(polygon, points) ];
-  //console.log(points.length, hull.length);
   return hull;
 };
 
